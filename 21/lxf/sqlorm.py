@@ -21,8 +21,14 @@ class User(Base):
 
 engine = create_engine('mysql+mysqldb://root:123456@127.0.0.1:3306/test')
 DBsession = sessionmaker(bind=engine)
+# session = DBsession()
+# new_user = User(id='6', name='bob')
+# session.add(new_user)
+# session.commit()
+# session.close()
+
 session = DBsession()
-new_user = User(id='5', name='bob')
-session.add(new_user)
-session.commit()
+user = session.query(User).filter(User.id == '6').one()
+print 'type:', type(user)
+print 'name:', user.name
 session.close()
